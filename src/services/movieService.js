@@ -2,6 +2,7 @@ import { apiRequest } from "/src/helpers/apiHelpers.js";
 import { validateForm } from "/src/utils/validateForm.js";
 
 const API_URL = "http://localhost:8888/filme";
+const API_URL_avaliacao = "http://localhost:8888";
 
 export async function handleMovieRequest(endpoint, payload, token) {
 	return apiRequest(`${API_URL}/${endpoint}`, "POST", payload, token);
@@ -42,4 +43,8 @@ export async function validateNewMovie(formData) {
 
 export async function toggleMovieFavorite(id, action) {
 	return apiRequest(`${API_URL}/${id}/${action}`, "POST");
+}
+
+export async function handlePublishRating(endpoint, payload, token) {
+	return apiRequest(`${API_URL_avaliacao}/${endpoint}`, "POST", payload, token);
 }

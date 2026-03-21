@@ -5,6 +5,8 @@ import {
 	IconBack,
 } from "/src/assets/icons/icons.js";
 
+import { setupBackButton } from "/src/components/movies/DetailsMovie/MovieDetailHandler.js";
+
 function createDetailItem(label, value) {
 	return DOM.createLi("movie-page__info-item", [
 		DOM.createSpan("movie-page__info-label", `${label}: `),
@@ -17,7 +19,7 @@ function createStarItem(icon) {
 }
 
 function createBackButton() {
-	return DOM.createDiv("movie-page__nav-back", [
+	const backButton = DOM.createDiv("movie-page__nav-back", [
 		DOM.createButton({
 			className: "movie-page__btn-back",
 			children: [
@@ -26,6 +28,10 @@ function createBackButton() {
 			],
 		}),
 	]);
+
+	setupBackButton(backButton);
+
+	return backButton;
 }
 
 function createRatingStars(reviewCount, averageRating, maxStars = 5) {

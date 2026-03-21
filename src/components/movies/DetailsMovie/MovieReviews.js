@@ -1,7 +1,8 @@
 import { DOM } from "/src/helpers/dom/index.js";
 import { IconStar, IconStarComplete } from "/src/assets/icons/icons.js";
+import { setupRatingButton } from "/src/components/movies/DetailsMovie/MovieDetailHandler.js";
 
-function createHeader() {
+function createHeader(movie, currentUser) {
 	const header = DOM.createHeader("movie-page__reviews-header");
 
 	const title = DOM.createH1("movie-page__reviews-title", "Avaliações");
@@ -16,6 +17,8 @@ function createHeader() {
 	});
 
 	header.append(title, button);
+
+	setupRatingButton(button, movie, currentUser);
 
 	return header;
 }
@@ -92,7 +95,7 @@ function createItemList(userReview, otherReviews) {
 	return [...userReviewItem, ...otherReviewItems];
 }
 
-export function createMovieReviewSection(allReviews, currentUser) {
+export function createMovieReviewSection(allReviews, currentUser, movie) {
 	const reviewSection = DOM.createDiv("movie-page__reviews");
 
 	const userReview = currentUser
@@ -104,7 +107,7 @@ export function createMovieReviewSection(allReviews, currentUser) {
 		: allReviews;
 
 	reviewSection.append(
-		createHeader(),
+		createHeader(movie, currentUser ),
 		DOM.createUl(
 			"movie-page__reviews-list",
 			createItemList(userReview, otherReviews)
