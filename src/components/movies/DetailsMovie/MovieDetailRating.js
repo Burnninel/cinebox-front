@@ -117,6 +117,7 @@ export function createModalRating(movie, currentUser) {
 
 	const bsModal = new Modal(modalEl);
 
+	const cancelButton = modalEl.querySelector(".rating-modal__cancel");
 	const commentInput = modalEl.querySelector(".rating-modal__textarea");
 	const submitButton = modalEl.querySelector(".rating-modal__submit");
 
@@ -137,6 +138,25 @@ export function createModalRating(movie, currentUser) {
 			});
 		};
 	});
+
+	const resetModalFields = () => {
+		commentInput.value = "";
+		starsSelected = 0;
+		items.forEach((starItem) => starItem.classList.remove("is-selected"));
+	};
+
+	cancelButton.onclick = () => {
+		bsModal.hide();
+	};
+
+	if (modalEl._resetModalFieldsHandler) {
+		modalEl.removeEventListener(
+			"hidden.bs.modal",
+			modalEl._resetModalFieldsHandler,
+		);
+	}
+	modalEl._resetModalFieldsHandler = resetModalFields;
+	modalEl.addEventListener("hidden.bs.modal", resetModalFields);
 
 	const toastContainer = ToastContainer();
 
