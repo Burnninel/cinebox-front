@@ -7,7 +7,7 @@ export async function MyMovies(currentUser) {
 
   const { data: { filmes } } = await fetchMoviesByUser(currentUser.token);
 
-  fragment.appendChild(Header());
+  fragment.appendChild(Header(currentUser));
 
   const section = await MovieSection("Meus Filmes", filmes);
   fragment.appendChild(section);

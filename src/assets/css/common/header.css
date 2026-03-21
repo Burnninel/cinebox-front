@@ -21,6 +21,56 @@
   gap: 0.8rem;
 }
 
+.global-header__login,
+.global-header__user {
+  display: flex;
+  align-items: center;
+}
+
+.global-header__user {
+  gap: 0.6rem;
+}
+
+.global-header__user-greeting {
+  color: var(--gray-300);
+  font-size: 0.95rem;
+}
+
+.global-header__user-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 6px;
+  background-color: #ffffff10;
+}
+
+.global-header__user-avatar svg {
+  width: 1rem;
+  height: 1rem;
+  fill: var(--purple-light);
+}
+
+.global-header__logout-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 2rem;
+  padding: 0 0.8rem;
+  color: var(--gray-300);
+  background-color: #ffffff09;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.global-header__logout-btn:hover {
+  color: var(--white);
+  background-color: #ffffff16;
+}
+
 .global-header__btn {
   display: flex;
   align-items: center;
@@ -70,6 +120,10 @@
   .global-header__btn svg,
   .global-header__btn span {
     height: 0.9rem;
+  }
+
+  .global-header__user-greeting {
+    display: none;
   }
 }
 

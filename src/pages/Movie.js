@@ -5,7 +5,7 @@ import { fetchMovieById } from "/src/services/movieService.js";
 export async function Movie(currentUser, params) {
 	const fragment = document.createDocumentFragment();
 
-	const header = Header();
+	const header = Header(currentUser);
 	fragment.appendChild(header);
 
 	const getMovie = await fetchMovieById(params.id);

@@ -1,12 +1,16 @@
 import { DOM } from "/src/helpers/dom/index.js";
 import { Element } from "/src/helpers/element/index.js";
-import { IconLogo, IconPopcorn, IconMovie } from "/src/assets/icons/icons.js";
+import {
+	IconLogo,
+	IconPopcorn,
+	IconMovie,
+	IconUser,
+} from "/src/assets/icons/icons.js";
 import { navigateTo } from "/src/router.js";
 
-const buttonsConfig = [
+const navButtonsConfig = [
 	{ icon: IconPopcorn, label: "Explorar", form: "explorar" },
 	{ icon: IconMovie, label: "Meus Filmes", form: "meus-filmes" },
-	{ label: "Entrar", form: "login" },
 ];
 
 function createButton({ icon, label, form }) {
@@ -22,7 +26,32 @@ function createButton({ icon, label, form }) {
 	});
 }
 
-export function Header() {
+function extractFirstName(currentUser) {
+	const displayName = currentUser?.nome || currentUser?.name || "Usuário";
+	return displayName.trim().split(" ")[0];
+}
+
+function createLoggedUserInfo(currentUser) {
+	const firstName = extractFirstName(currentUser);
+
+	const logoutButton = DOM.createButton({
+		className: "global-header__logout-btn",
+		textContent: "Sair",
+	});
+
+	logoutButton.addEventListener("click", () => {
+		document.cookie = "token=; path=/; max-age=0";
+		navigateTo("/login");
+	});
+
+	return DOM.createDiv("global-header__user", [
+		DOM.createSpan("global-header__user-greeting", `Olá, ${firstName}`),
+		DOM.createDiv("global-header__user-avatar", [DOM.createIcon(IconUser)]),
+		logoutButton,
+	]);
+}
+
+export function Header(currentUser = null) {
 	const logo = DOM.createDiv("global-header__logo", [
 		DOM.createIcon(IconLogo),
 	]);
@@ -31,26 +60,28 @@ export function Header() {
 		navigateTo("/explorar");
 	});
 
-	const buttons = buttonsConfig.map(createButton);
+	const navButtons = navButtonsConfig.map(createButton);
+	const loginButton = createButton({ label: "Entrar", form: "login" });
 
 	const navbar = Element.createElement({
 		tag: "nav",
 		className: "global-header__navbar",
-		children: buttons.filter((btn) => btn.dataset.form !== "login"),
+		children: navButtons,
 	});
 
-	const loginContainer = DOM.createDiv(
-		"global-header__login",
-		buttons.filter((btn) => btn.dataset.form === "login")
-	);
+	const rightContent = currentUser
+		? createLoggedUserInfo(currentUser)
+		: DOM.createDiv("global-header__login", [loginButton]);
 
 	const header = DOM.createHeader("global-header", [
 		logo,
 		navbar,
-		loginContainer,
+		rightContent,
 	]);
 
-	setupHeaderNavigation(buttons);
+	setupHeaderNavigation(
+		currentUser ? navButtons : [...navButtons, loginButton],
+	);
 
 	return header;
 }
