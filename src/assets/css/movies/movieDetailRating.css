@@ -124,6 +124,71 @@
 	list-style: none;
 }
 
+.rating-modal__user-rating {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+
+.rating-modal__user-rating-label {
+	font-size: 0.8rem;
+	color: var(--gray-300);
+}
+
+.rating-modal__stars {
+	gap: 0.3rem;
+}
+
+.rating-modal__stars .movie-page__rating-item svg {
+	width: 1.4rem;
+	height: 1.4rem;
+}
+
+.rating-modal__star-button {
+	all: unset;
+	position: relative;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+}
+
+.rating-modal__star-outline,
+.rating-modal__star-filled {
+	display: inline-flex;
+}
+
+.rating-modal__star-outline svg {
+	fill: var(--purple-dark);
+}
+
+.rating-modal__star-filled {
+	position: absolute;
+	inset: 0;
+	opacity: 0;
+	transition: opacity 0.2s ease;
+}
+
+.rating-modal__star-filled svg {
+	fill: var(--purple-dark);
+}
+
+.rating-modal__stars .movie-page__rating-item:hover .rating-modal__star-filled,
+.rating-modal__stars
+	.movie-page__rating-item:has(~ .movie-page__rating-item:hover)
+	.rating-modal__star-filled,
+.rating-modal__stars
+	.movie-page__rating-item.is-selected
+	.rating-modal__star-filled,
+.rating-modal__stars
+	.movie-page__rating-item:focus-within
+	.rating-modal__star-filled,
+.rating-modal__stars
+	.movie-page__rating-item:has(~ .movie-page__rating-item:focus-within)
+	.rating-modal__star-filled {
+	opacity: 1;
+}
+
 .modal-footer {
 	display: flex;
 	justify-content: flex-end;

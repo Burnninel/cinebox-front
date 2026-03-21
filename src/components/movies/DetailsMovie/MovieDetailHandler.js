@@ -19,13 +19,8 @@ export function setupRatingButton(wrapper, movie, currentUser) {
 	});
 }
 
-export async function publishRating(commentInput, movieId, currentUser) {
+export async function publishRating(payload, movieId, currentUser) {
 	const token = currentUser?.token;
-
-	const payload = {
-		nota: 2, // Valor fixo para teste
-		comentario: commentInput.value.trim(),
-	};
 
 	showLoading();
 	try {
