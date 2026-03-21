@@ -82,27 +82,28 @@
   right: 1rem;
   background-color: #000000a9;
   border-radius: 16px;
-  padding: 10px 12px;
-  gap: 3px;
+  padding: 8px 10px;
+  gap: 2px;
   z-index: 1;
 }
 
 .card__rating svg {
-  width: 1rem;
-  height: 1rem;
-  margin-left: 4px;
+  width: 0.9rem;
+  height: 0.9rem;
+  margin-left: 3px;
   fill: var(--white);
 }
 
 .card__rating-score {
-  font-size: 1rem;
+  font-size: 0.95rem;
   color: var(--white) !important;
+  font-weight: 700;
 }
 
 .card__rating-scale {
-  font-size: 0.6rem;
+  font-size: 0.65rem;
   color: var(--gray-200);
-  align-self: flex-end;
+  align-self: center;
 }
 
 .card__rating-score,

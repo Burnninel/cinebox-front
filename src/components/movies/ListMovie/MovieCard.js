@@ -2,8 +2,14 @@ import { IconStarComplete } from "/src/assets/icons/icons.js";
 import { DOM } from "/src/helpers/dom/index.js";
 
 function createRating(media) {
+	const isEmptyValue =
+		media === null ||
+		media === undefined ||
+		(typeof media === "string" && media.trim() === "");
+	const ratingValue = isEmptyValue ? 0 : media;
+
 	return DOM.createDiv("card__rating", [
-		DOM.createSpan("card__rating-score", media),
+		DOM.createSpan("card__rating-score", String(ratingValue)),
 		DOM.createSpan("card__rating-scale", " /5"),
 		DOM.createIcon(IconStarComplete),
 	]);
